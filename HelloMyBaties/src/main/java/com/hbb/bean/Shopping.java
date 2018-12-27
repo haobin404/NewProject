@@ -1,6 +1,6 @@
 package com.hbb.bean;
 
-public class Shopping {
+public class  Shopping {
 	private Integer id;
 private String name;
 private double price;
