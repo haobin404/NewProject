@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbb.bean.ShoppingBean">
+<select id="selectShop" resultType="Shopping">
+select * from Shoping
+</select>
+<select id="selectShopId" parameterType="int" resultType="Shopping">
+select * from Shoping where id=#{id}
+</select>
+<insert id="insertShop" parameterType="Shopping">
+insert into Shoping(name,price,count) 
+values(#{name},#{price},#{count})
+</insert>
+<delete id="deleteShop" parameterType="int">
+delete from Shoping where id=#{id}
+</delete>
+<update id="updateShop" parameterType="com.hbb.bean.Shopping">
+update Shoping set name=#{name},price=#{price},count=#{count} 
+where id=#{id} 
+</update>
+</mapper>
