@@ -1,7 +1,7 @@
 package com.hbb.bean;
 
 public class Shopping {
-//	 id
+//	this is  id
 	private Integer id;
 private String name;
 private double price;
