@@ -5,7 +5,7 @@
 	<artifactId>HelloMyBaties</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
-		<!-- log4j hbb123 -->
+		<!-- log4j-->
 		<dependency>
 			<groupId>org.mybatis.generator</groupId>
 			<artifactId>mybatis-generator-core</artifactId>
