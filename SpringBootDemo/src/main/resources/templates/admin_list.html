@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>管理员列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../static/style/adminStyle.css" th:href="@{style/adminStyle.css}"rel="stylesheet" type="text/css" />
+<script src="../static/js/jquery.js" th:src="@{js/jquery.js}"></script>
+<script src="../static/js/public.js" th:src="@{js/public.js}"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>管理员列表</em></span>
+    <span class="modular fr"><a href="revise_password.html" class="pt-link-btn">+添加管理员</a></span>
+  </div> 
+  <table class="list-style Interlaced">
+   <tr> 
+    <th>管理员账号</th>
+    <th>电子邮箱地址</th>
+    <th>加入时间</th>
+   </tr>
+   <tr th:each="bean:${lists}" >
+    <td th:text="${bean.id}">DeathGhost</td>
+    <td th:text="${bean.name}">DeathGhost@sina.cn</td>
+    <td class="center" th:text="${bean.date}">2015-04-18 17:38</td>
+   </tr>
+   <tr th:each="bean:${lists}" th:object="${bean}">
+    <td th:text="*{id}">DeathGhost</td>
+    <td th:text="*{name}">DeathGhost@sina.cn</td>
+    <td class="center" th:text="*{date}">2015-04-18 17:38</td>
+   </tr>
+  </table>
+  <p th:object="${lists[1]}" th:text="*{name}+*{date}+*{id}">
+  </p>
+  <h1 align="center" style="color:red;" 
+  th:text="|calendars处理:${#calendars.format(today,'yyyy-MM-dd HH:mm:ss')}"></h1>
+ </div>
+ <div th:insert="~{@{header/floor} :: ${true}?c:c1}"></div>
+ <span th:replace="~{header/floor :: c1}"></span>
+ <!--if值 ? hbb-->
+<p th:text="${true}?hbb"></p>
+ <!--if值 ? hbb : hah -->
+<p th:text="${true}?_:${'哈哈'}">啦啦啦啦</p>
+ <!--值 ? : hbb-->
+<p th:text="${null}?:hbb"></p>
+<span th:switch="${'456'}">
+<span th:case="${'123'}" th:text="123"></span>
+<span th:case="${456}" th:text="456"></span>
+</span>
+
+<p th:if="${true}">this is if property</p>
+<p th:unless="${not true}">this is unless property</p>
+</body>
+</html>
