@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.two.dao.inter.ShopVersionDaoInter">
+<resultMap type="ShopVersionBean" id="ShopVersionBeanMap">
+<id property="svid" column="sv_id"/>
+<result property="svname" column="sv_name"/>
+<result property="svprice" column="sv_price"/>
+<result property="svid" column="sv_id"/>
+</resultMap>
+<select id="getShopVersionId" parameterType="int" resultMap="ShopVersionBeanMap">
+SELECT * FROM shop_version WHERE s_id=#{id}
+</select>
+</mapper>

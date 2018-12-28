@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.two.dao.inter.ShopCartDaoInter">
+<resultMap type="ShopCartBean" id="ShopCartResult">
+<id property="scid" column="sc_id"/>
+<result property="sname" column="s_name"/>
+<result property="simg" column="s_img"/>
+<result property="svname" column="sv_name"/>
+<result property="svprice" column="sv_price"/>
+<result property="scolor" column="sc_color"/>
+<result property="uid" column="u_id"/>
+</resultMap>
+<sql id="shopCardSql">
+s_name,s_img,sv_name,sv_price,sc_color,u_id
+</sql>
+<insert id="insertShopCart" parameterType="ShopCartBean">
+insert into shop_cart(
+<include refid="shopCardSql"></include>
+)
+values(#{sname},#{simg},#{svname},#{svprice},#{scolor},#{uid})
+</insert>
+<!-- 分页 -->
+<select id="getCount" parameterType="int" resultType="int">
+select count(*) from shop_cart where u_id = #{id}
+</select>
+
+<select id="getShop" resultMap="ShopCartResult">
+select * from shop_cart where u_id = #{uid} limit #{begin},#{end}
+</select>
+<delete id="deleteShopCart" parameterType="int">
+delete from shop_cart where sc_id=#{id}
+</delete>
+</mapper>

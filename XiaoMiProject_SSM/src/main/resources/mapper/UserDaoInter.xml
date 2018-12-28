@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.two.dao.inter.UserDaoInter">
+
+<sql id="userSql">
+ u_name,u_pwd,u_phone,u_email
+</sql>
+<select id="login" parameterType="UserBean" resultType="int">
+select u_id from tb_user where u_name=#{uname} and u_pwd=#{upassword}
+</select>
+<!-- 判断重复 -->
+<select id="findUser" parameterType="UserBean" resultType="int">
+select count(*) from tb_user where u_name=#{uname}
+</select>
+
+<insert id="insertUser" parameterType="UserBean">
+insert into tb_user(
+<include refid="userSql"/>
+)
+values(#{uname},#{upassword},#{uphone},#{uemail})
+</insert>
+</mapper>

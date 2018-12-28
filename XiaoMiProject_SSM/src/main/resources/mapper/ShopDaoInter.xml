@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.two.dao.inter.ShopDaoInter">
+<resultMap type="ShopBean" id="shopResultMape">
+<id property="sid" column="s_id"></id>
+<result property="sname" column="s_name"/>
+<result property="sintro" column="s_intro"/>
+<result property="simg" column="s_img"/>
+<result property="scolor" column="s_color"/>
+<result property="sprice" column="s_price"/>
+<result property="stid" column="st_id"/>
+</resultMap>
+<select id="findShopTwoType" parameterType="String" resultMap="shopResultMape">
+SELECT distinct s_id,s_name,s_intro,s_img,s_color 
+FROM shop,shop_type WHERE shop.st_id=shop_type.st_id
+AND shop_type.st_name=#{str}
+</select>
+
+<select id="findShopFenYeType" resultMap="shopResultMape">
+SELECT * FROM shop,shop_type
+WHERE shop.st_id=shop_type.st_id
+AND shop_type.st_name IN 
+<foreach collection="str" item="s" open="(" close=")" separator=",">
+<if test="s!=null">'${s}'</if>
+</foreach>
+ LIMIT #{begin},#{len}
+</select>
+<select id="getCountType" resultType="int">
+SELECT COUNT(*) FROM shop,shop_type
+WHERE shop.st_id=shop_type.st_id 
+AND shop_type.st_name IN
+<foreach collection="str" item="s" open="(" close=")" separator=",">
+<if test="s!=null">'${s}'</if>
+</foreach>
+</select>
+
+<select id="getShopId" resultMap="shopResultMape" parameterType="int">
+select * from shop where s_id=#{id}
+</select>
+
+<select id="getShopLike" parameterType="String" resultMap="shopResultMape">
+select * from shop where s_name like #{name} limit 10
+</select>
+</mapper>
